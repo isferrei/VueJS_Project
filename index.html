@@ -7,50 +7,59 @@
     </head>
     <body>
         <div id="shopping-list">
-            <div class="header">
-                <h1>{{ header.toLocaleUpperCase() }}</h1>
-                <button class="btn btn-primary" v-if="state === 'default'" @click="changeState('edit')">Add item</button>
-                <button class="btn btn-danger" v-else  @click="changeState('default')">Cancel</button>
+            <div class="header container">
+                <h3>{{ header.toLocaleUpperCase() }}</h3>
+                <button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add item</button>
+                <button v-else class="btn btn-cancel" @click="changeState('default')">Cancel</button>
             </div>
-            <div class="add_item_form" v-if="state === 'edit'">
-                <input type="text" v-model="newItem" placeholder="Add an item..." @keyup.enter="saveItem">
+            <div v-if="state === 'edit'" class="add_item_form container">
+                <input v-model="newItem" type="text" placeholder="Add an item..." @keyup.enter="saveItem">
                 <button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem">Add</button>
-                <ul>
-                    <li v-for="item in items" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
+            </div>    
+                <ul class="container">
+                    <li v-for="item in reversedItems" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
                 </ul>
                 <p v-if="items.length === 0">Nice job! You've bought all your items</p>
-            </div>
         </div>
         <script src="https://unpkg.com/vue"></script>
         <script>
             var shoppinglist = new Vue({
                 el: '#shopping-list',
                 data: {
-                        header: 'Shopping list app',
+                        
                         state: 'default',
+                        header: 'Shopping list app',
                         newItem: '',
                         items: [
                            {
                                label: '10 party hats',
                                purchased: false,
-                               highPriority: true,
+                               highPriority: false,
                            },
                            {
                                label: '2 board games',
-                               purchased: false,
+                               purchased: true,
                                highPriority: false,
                            },
                            {
                                label: '30 candles',
-                               purchased: true,
+                               purchased: false,
                                highPriority: false,
                            },         
                         ]
                     },
+                computed: {
+                    reversedItems(){
+                        return this.items.slice(0).reverse();
+                    },
+                },
                 methods: {
                     saveItem: function(){
-                        this.items.push(this.newItem),
-                        this.newItem='';
+                        this.items.push({
+                        label: this.newItem,
+                        purchased: false,
+                        });
+                        this.newItem = '';
                     },
                     changeState: function(newState){
                         this.state = newState;

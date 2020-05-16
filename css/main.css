@@ -5,19 +5,72 @@
 body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     line-height: 25px;
+    background-image: linear-gradient(#FD6231, #f4511e, #f4511e);
+}
+
+ul{
+    background-color: #f8f8f8;
+    width: 30% !important;
+    width: 32% !important;
+    height: auto;
 }
 
 ul li{
-    list-style: none;
+    margin-left: 3%;
+    list-style: decimal;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+}
+.add_item_form{
+    text-align-last: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-danger{
-    position: relative;
-    top: 50px;
-    margin-left: 20%;
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-cancel{
+    top: 30px;
+    margin: 15px;
+    width: 150px;
+    color: #fff;
+    background-color: transparent;
+    border-color: #fba380;
+}
+
+.btn-cancel:hover{
+    background-color: #ff8a5c   ;
+    border-color: #ff8a5c;
 }
 
 .strikeout{
     text-decoration: line-through;
-    color: #B8B8B8B8;
+    color: #ff8a5c;
+}
+
+input{
+    width: 200px;
+    margin: 0px;
+}
+.btn-primary{
+    background-color: #66608b;
+    width: 200px;
+    margin: 15px;
+}
+
+.btn-primary:hover{
+    background-color: #607d8b;
+}
+
+h3{
+    text-align: center;
+    color: #000;
+    font-weight: bold;
 }
